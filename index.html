@@ -1,51 +1,88 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Quiz - Vestibular e Profissão</title>
+    <title>Meu Futuro Após o Ensino Médio</title>
 
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 
 <body>
+    <main class="quiz-container">
 
-    <main class="caixa-principal">
+        <header class="cabecalho">
+            <span class="etiqueta">MEU FUTURO</span>
+            <h1>Depois do Ensino Médio</h1>
+            <p>
+                Responda às perguntas e reflita sobre seus planos,
+                sua profissão e seu futuro.
+            </p>
+        </header>
 
-        <h1>🎓 Vestibular e Profissão</h1>
+        <section id="secao-perguntas">
 
-        <p class="subtitulo">
-            Responda às perguntas e descubra mais sobre seus interesses
-            e seu futuro profissional!
-        </p>
+            <div class="progresso-info">
+                <span id="contador">Pergunta 1 de 5</span>
+                <span id="porcentagem">20%</span>
+            </div>
 
-        <!-- ÁREA DAS PERGUNTAS -->
-        <div class="caixa-perguntas">
-            A pergunta aparecerá aqui.
-        </div>
+            <div
+                class="barra-progresso"
+                role="progressbar"
+                aria-label="Progresso das perguntas"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="20"
+                id="barra"
+            >
+                <div id="progresso"></div>
+            </div>
 
-        <!-- ÁREA DAS RESPOSTAS -->
-        <div class="caixa-alternativas">
-            <!-- Os botões serão criados automaticamente pelo JavaScript -->
-        </div>
+            <div class="caixa-pergunta">
+                <h2 id="pergunta">Carregando pergunta...</h2>
 
-        <!-- ÁREA DO RESULTADO -->
-        <div class="caixa-resultado">
+                <p class="instrucao">
+                    Escolha uma das duas opções:
+                </p>
 
-            <h2>🎯 Resultado</h2>
+                <div id="opcoes" class="opcoes"></div>
 
-            <p class="texto-resultado">
-                Seu resultado aparecerá aqui.
+                <p id="mensagem" aria-live="polite"></p>
+
+                <button id="proximo" type="button" disabled>
+                    Próxima pergunta →
+                </button>
+            </div>
+
+        </section>
+
+        <section id="secao-resultado" hidden>
+            <div class="icone-final" aria-hidden="true">🎓</div>
+
+            <h2>Você concluiu!</h2>
+
+            <p class="texto-final">
+                Obrigado por compartilhar suas ideias sobre
+                o vestibular, a profissão e o futuro.
             </p>
 
-        </div>
+            <h3>Suas respostas</h3>
+
+            <ol id="lista-respostas"></ol>
+
+            <button id="reiniciar" type="button">
+                Responder novamente ↻
+            </button>
+        </section>
+
+        <footer>
+            <p>Seu futuro começa com suas escolhas.</p>
+        </footer>
 
     </main>
-
-    <script src="script.js"></script>
-
 </body>
-
 </html>

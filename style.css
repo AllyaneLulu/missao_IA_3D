@@ -1,167 +1,259 @@
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    min-height: 100vh;
+:root {
+    --roxo: #6d28d9;
+    --roxo-escuro: #4c1d95;
+    --roxo-claro: #ede9fe;
+    --texto: #1f2937;
+    --texto-secundario: #6b7280;
+    --borda: #ddd6fe;
+    --fundo: #f5f3ff;
+}
 
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 24px 16px;
     display: flex;
     justify-content: center;
     align-items: center;
-
     font-family: Arial, Helvetica, sans-serif;
-
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
-
-    padding: 20px;
+    color: var(--texto);
+    background: linear-gradient(
+        135deg,
+        #dbeafe,
+        #ede9fe,
+        #f5f3ff
+    );
 }
 
-.caixa-principal {
+.quiz-container {
     width: 100%;
-    max-width: 750px;
+    max-width: 560px;
+    padding: 32px;
+    background: white;
+    border-radius: 22px;
+    box-shadow: 0 15px 45px rgba(49, 30, 90, 0.12);
+}
 
-    background-color: white;
-
-    padding: 40px;
-
-    border-radius: 20px;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-
+.cabecalho {
     text-align: center;
+    margin-bottom: 30px;
+}
+
+.etiqueta {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: var(--roxo-claro);
+    color: var(--roxo);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 h1 {
-    color: #312e81;
-
-    font-size: 32px;
-
-    margin-bottom: 10px;
+    margin: 16px 0 10px;
+    font-size: 29px;
+    line-height: 1.2;
+    color: var(--roxo-escuro);
 }
 
-.subtitulo {
-    color: #666;
-
-    font-size: 17px;
-
-    margin-bottom: 30px;
-
-    line-height: 1.5;
+.cabecalho p {
+    margin: 0;
+    color: var(--texto-secundario);
+    font-size: 15px;
+    line-height: 1.6;
 }
 
-.caixa-perguntas {
-    background-color: #eef2ff;
-
-    color: #1e1b4b;
-
-    padding: 25px;
-
-    border-radius: 15px;
-
-    font-size: 20px;
-
-    font-weight: bold;
-
-    line-height: 1.5;
-
-    margin-bottom: 25px;
-}
-
-.caixa-alternativas {
+.progresso-info {
     display: flex;
-
-    flex-direction: column;
-
-    gap: 15px;
-}
-
-.caixa-alternativas button {
-    width: 100%;
-
-    padding: 18px;
-
-    border: 2px solid #6366f1;
-
-    border-radius: 12px;
-
-    background-color: white;
-
-    color: #312e81;
-
-    font-size: 16px;
-
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
     font-weight: bold;
+    color: var(--texto-secundario);
+}
 
+.barra-progresso {
+    width: 100%;
+    height: 8px;
+    margin: 12px 0 28px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #e5e7eb;
+}
+
+#progresso {
+    width: 20%;
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #7c3aed, #a78bfa);
+    transition: width 0.3s ease;
+}
+
+.caixa-pergunta h2,
+#secao-resultado h2 {
+    margin: 0 0 12px;
+    font-size: 22px;
+    line-height: 1.45;
+}
+
+.instrucao {
+    margin: 0 0 16px;
+    color: var(--texto-secundario);
+    font-size: 14px;
+}
+
+.opcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.opcao {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid var(--borda);
+    border-radius: 13px;
+    background: #faf9ff;
+    color: var(--texto);
+    font-size: 15px;
+    line-height: 1.5;
+    text-align: left;
     cursor: pointer;
-
-    transition: 0.3s;
+    transition: background 0.2s, border-color 0.2s;
 }
 
-.caixa-alternativas button:hover {
-    background-color: #6366f1;
+.opcao:hover:not(:disabled) {
+    border-color: var(--roxo);
+    background: #f3e8ff;
+}
 
+.opcao.selecionada {
+    border-color: var(--roxo);
+    background: var(--roxo);
     color: white;
-
-    transform: translateY(-3px);
-
-    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
 }
 
-.caixa-resultado {
-    margin-top: 30px;
-
-    padding: 25px;
-
-    border-radius: 15px;
-
-    background-color: #f0fdf4;
-
-    border: 2px solid #22c55e;
+.opcao:disabled {
+    cursor: default;
 }
 
-.caixa-resultado h2 {
-    color: #166534;
-
-    margin-bottom: 15px;
+#mensagem {
+    min-height: 20px;
+    margin: 14px 0 4px;
+    color: var(--roxo);
+    font-size: 13px;
 }
 
-.texto-resultado {
-    color: #374151;
+#proximo,
+#reiniciar {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 12px;
+    background: var(--roxo);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
 
-    font-size: 17px;
+#proximo:hover:not(:disabled),
+#reiniciar:hover {
+    background: var(--roxo-escuro);
+}
 
-    line-height: 1.7;
+#proximo:disabled {
+    background: #c4b5fd;
+    cursor: not-allowed;
+}
 
+#secao-resultado {
+    text-align: center;
+}
+
+.icone-final {
+    display: inline-flex;
+    width: 70px;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    border-radius: 50%;
+    background: var(--roxo-claro);
+    font-size: 32px;
+}
+
+.texto-final {
+    color: var(--texto-secundario);
+    line-height: 1.6;
+}
+
+#secao-resultado h3 {
+    margin-top: 28px;
     text-align: left;
 }
 
-/* Responsividade para celulares */
+#lista-respostas {
+    padding-left: 24px;
+    text-align: left;
+    line-height: 1.6;
+}
 
-@media (max-width: 600px) {
+#lista-respostas li {
+    margin-bottom: 16px;
+    padding-left: 5px;
+    overflow-wrap: anywhere;
+}
 
-    .caixa-principal {
-        padding: 25px 20px;
+footer {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+button:focus-visible {
+    outline: 3px solid #f59e0b;
+    outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 14px 10px;
+    }
+
+    .quiz-container {
+        padding: 23px 19px;
+        border-radius: 18px;
     }
 
     h1 {
         font-size: 25px;
     }
 
-    .subtitulo {
-        font-size: 15px;
+    .caixa-pergunta h2,
+    #secao-resultado h2 {
+        font-size: 20px;
     }
 
-    .caixa-perguntas {
-        font-size: 17px;
-
-        padding: 20px;
-    }
-
-    .caixa-alternativas button {
-        font-size: 15px;
-
-        padding: 15px;
+    .opcao {
+        padding: 14px;
     }
 }
